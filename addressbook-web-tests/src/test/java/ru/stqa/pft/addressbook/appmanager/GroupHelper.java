@@ -3,16 +3,25 @@ package ru.stqa.pft.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import ru.stqa.pft.addressbook.model.GroupData;
+<<<<<<< HEAD
 import ru.stqa.pft.addressbook.tests.GroupFormContacts;
 
 /**
  * Created by iryamka on 12/13/2016.
+=======
+
+/**
+ * Created by iryamka on 12/9/2016.
+>>>>>>> origin/master
  */
 public class GroupHelper extends HelperBase {
 
   public GroupHelper(FirefoxDriver wd) {
     super(wd);
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
   }
 
   public void returnToGroupPage() {
@@ -40,6 +49,7 @@ public class GroupHelper extends HelperBase {
   public void selectGroup() {
     click(By.name("selected[]"));
   }
+<<<<<<< HEAD
 
   public void submitNewContact() {
     click(By.name("submit"));
@@ -58,4 +68,6 @@ public class GroupHelper extends HelperBase {
   public void addNewContact() {
     click(By.linkText("add new"));
   }
+=======
+>>>>>>> origin/master
 }
