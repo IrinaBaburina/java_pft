@@ -3,7 +3,7 @@ package ru.stqa.pft.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import ru.stqa.pft.addressbook.model.GroupData;
-import ru.stqa.pft.addressbook.tests.GroupFormContacts;
+import ru.stqa.pft.addressbook.model.GroupFormContacts;
 
 /**
   * Created by iryamka on 12/13/2016.

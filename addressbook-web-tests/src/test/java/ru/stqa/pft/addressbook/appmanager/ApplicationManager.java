@@ -36,4 +36,6 @@ public class ApplicationManager {
            public NavigationHelper getNavigationHelper() {
         return navigationHelper;
       }
- }
+
+           public ContactsHelper getContactHelper() { return contactsHelper; }
+}
