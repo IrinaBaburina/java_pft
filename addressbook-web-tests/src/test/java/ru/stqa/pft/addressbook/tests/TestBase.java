@@ -20,11 +20,9 @@ public class TestBase {
   public void tearDown() {
     app.stop();
   }
-
-<<<<<<< HEAD
+  
   public ApplicationManager getApp() {
     return app;
   }
-=======
->>>>>>> origin/master
+
 }
