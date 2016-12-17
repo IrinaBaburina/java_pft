@@ -2,17 +2,19 @@ package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 /**
  * Created by iryamka on 12/13/2016.
  */
 public class HelperBase {
-  FirefoxDriver wd;
+  WebDriver wd;
 
-  public HelperBase(FirefoxDriver wd) {
+  public HelperBase(WebDriver wd) {
     this.wd = wd;
   }
+
 
   protected void click(By locator) {
     wd.findElement(locator).click();

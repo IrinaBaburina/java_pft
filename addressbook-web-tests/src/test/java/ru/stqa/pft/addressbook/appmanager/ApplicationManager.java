@@ -1,41 +1,61 @@
 package ru.stqa.pft.addressbook.appmanager;
 
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.BrowserType;
 
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 /**
  * Created by iryamka on 12/13/2016.
  */
 public class ApplicationManager {
- FirefoxDriver wd;
+ WebDriver wd;
 
   private ContactsHelper contactsHelper;
   private SessionHelper sessionHelper;
   private NavigationHelper navigationHelper  ;
   private GroupHelper groupHelper;
+  private String browser;
+
+  public ApplicationManager(String browser) {
+    this.browser = browser;
+  }
 
   public void init() {
-        wd = new FirefoxDriver();
-        wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-        wd.get("http://localhost/addressbook/group.php");
-        groupHelper = new GroupHelper(wd);
-        navigationHelper = new NavigationHelper(wd);
-        sessionHelper = new SessionHelper(wd);
-        contactsHelper = new ContactsHelper(wd);
-        sessionHelper.login("admin", "secret");
-      }
+    if (Objects.equals(browser, BrowserType.FIREFOX)) {
+      wd = new FirefoxDriver();
+    } else if (Objects.equals(browser, BrowserType.CHROME)) {
+      wd = new ChromeDriver();
+    } else if (Objects.equals(browser, BrowserType.IE)) {
+      wd = new InternetExplorerDriver();
+    }
 
-           public void stop() {
-         wd.quit();
-      }
 
-           public GroupHelper getGroupHelper() {
-        return groupHelper;
-      }
+    wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+    wd.get("http://localhost/addressbook/group.php");
+    groupHelper = new GroupHelper(wd);
+    navigationHelper = new NavigationHelper(wd);
+    sessionHelper = new SessionHelper(wd);
+    contactsHelper = new ContactsHelper(wd);
+    sessionHelper.login("admin", "secret");
+  }
 
-           public NavigationHelper getNavigationHelper() {
-        return navigationHelper;
-      }
+  public void stop() {
+    wd.quit();
+  }
 
-           public ContactsHelper getContactHelper() { return contactsHelper; }
+  public GroupHelper getGroupHelper() {
+    return groupHelper;
+  }
+
+  public NavigationHelper getNavigationHelper() {
+    return navigationHelper;
+  }
+
+  public ContactsHelper getContactHelper() {
+    return contactsHelper;
+  }
 }
