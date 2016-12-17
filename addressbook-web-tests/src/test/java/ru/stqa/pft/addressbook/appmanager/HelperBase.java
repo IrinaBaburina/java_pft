@@ -5,10 +5,10 @@ import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 /**
- * Created by iryamka on 12/9/2016.
+ * Created by iryamka on 12/13/2016.
  */
 public class HelperBase {
-  public FirefoxDriver wd;
+  FirefoxDriver wd;
 
   public HelperBase(FirefoxDriver wd) {
     this.wd = wd;
@@ -19,17 +19,20 @@ public class HelperBase {
   }
 
   protected void type(By locator, String text) {
-    click(locator);
-    wd.findElement(locator).clear();
-    wd.findElement(locator).sendKeys(text);
+     click(locator);
+     wd.findElement(locator).clear();
+     wd.findElement(locator).sendKeys(text);
+    }
+ public boolean isAlertPresent() {
+     try {
+       wd.switchTo().alert();
+       return true;
+       } catch (NoAlertPresentException e) {
+        return false;
+     }
+ }
+  public void closeAlert() {
+    wd.switchTo().alert().accept();
   }
 
-  public boolean isAlertPresent() {
-    try {
-      wd.switchTo().alert();
-      return true;
-    } catch (NoAlertPresentException e) {
-      return false;
-    }
-  }
-}
+ }

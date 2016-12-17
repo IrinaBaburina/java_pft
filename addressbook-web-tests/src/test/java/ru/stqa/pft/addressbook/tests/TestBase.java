@@ -20,5 +20,9 @@ public class TestBase {
   public void tearDown() {
     app.stop();
   }
+  
+  public ApplicationManager getApp() {
+    return app;
+  }
 
 }

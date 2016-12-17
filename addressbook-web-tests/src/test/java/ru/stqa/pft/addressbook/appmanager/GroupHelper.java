@@ -3,10 +3,11 @@ package ru.stqa.pft.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import ru.stqa.pft.addressbook.model.GroupData;
+import ru.stqa.pft.addressbook.model.GroupFormContacts;
 
 /**
- * Created by iryamka on 12/9/2016.
- */
+  * Created by iryamka on 12/13/2016.
+  */
 public class GroupHelper extends HelperBase {
 
   public GroupHelper(FirefoxDriver wd) {
@@ -14,7 +15,7 @@ public class GroupHelper extends HelperBase {
   }
 
   public void returnToGroupPage() {
-    click(By.linkText("group page"));
+     click(By.linkText("group page"));
   }
 
   public void submitGroupCreation() {
@@ -37,5 +38,31 @@ public class GroupHelper extends HelperBase {
 
   public void selectGroup() {
     click(By.name("selected[]"));
+  }
+
+  public void submitNewContact() {
+    click(By.name("submit"));
+  }
+
+  public void fillFormContact(GroupFormContacts groupFormContacts) {
+    type(By.name("firstname"), groupFormContacts.getFirstname());
+    type(By.name("lastname"), groupFormContacts.getLastname());
+    type(By.name("nickname"), groupFormContacts.getNickname());
+    type(By.name("company"), groupFormContacts.getCompany());
+    type(By.name("address"), groupFormContacts.getAddress());
+    type(By.name("mobile"), groupFormContacts.getMobile());
+    type(By.name("email"), groupFormContacts.getEmail());
+  }
+
+  public void addNewContact() {
+    click(By.linkText("add new"));
+  }
+
+  public void initGroupModofication() {
+    click(By.name("edit"));
+  }
+
+  public void submitGroupModification() {
+    click(By.name("update"));
   }
 }
