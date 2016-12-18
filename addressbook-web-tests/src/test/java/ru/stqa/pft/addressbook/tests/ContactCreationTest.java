@@ -9,7 +9,7 @@ public class ContactCreationTest extends TestBase {
     public void testGroupContacts() {
         app.getNavigationHelper().gotoGroupPage();
         app.getGroupHelper().addNewContact();
-        app.getGroupHelper().fillFormContact(new GroupFormContacts("Irina", "Baburina", "Lacosta", "RTT", "Halifax, Canada, NS", "+19994034225", "irina@hotmail.com"));
+        app.getGroupHelper().fillFormContact(new GroupFormContacts("Irina", "Baburina", "Lacosta", "RTT", "Halifax, Canada, NS", "+19994034225", "irina@hotmail.com", "test1"), true);
         app.getGroupHelper().submitNewContact();
     }
 

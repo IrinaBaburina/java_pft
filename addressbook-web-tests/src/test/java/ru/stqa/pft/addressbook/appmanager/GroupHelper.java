@@ -1,8 +1,11 @@
 package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.GroupData;
 import ru.stqa.pft.addressbook.model.GroupFormContacts;
 
@@ -16,7 +19,7 @@ public class GroupHelper extends HelperBase {
   }
 
   public void returnToGroupPage() {
-     click(By.linkText("group page"));
+    click(By.linkText("group page"));
   }
 
   public void submitGroupCreation() {
@@ -45,7 +48,7 @@ public class GroupHelper extends HelperBase {
     click(By.name("submit"));
   }
 
-  public void fillFormContact(GroupFormContacts groupFormContacts) {
+  public void fillFormContact(GroupFormContacts groupFormContacts, boolean creation) {
     type(By.name("firstname"), groupFormContacts.getFirstname());
     type(By.name("lastname"), groupFormContacts.getLastname());
     type(By.name("nickname"), groupFormContacts.getNickname());
@@ -53,6 +56,12 @@ public class GroupHelper extends HelperBase {
     type(By.name("address"), groupFormContacts.getAddress());
     type(By.name("mobile"), groupFormContacts.getMobile());
     type(By.name("email"), groupFormContacts.getEmail());
+
+    if (creation) {
+      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(groupFormContacts.getGroup());
+    } else {
+      Assert.assertFalse(isElementPresent(By.name("new_group")));
+    }
   }
 
   public void addNewContact() {
