@@ -55,4 +55,17 @@ public class ContactsHelper extends HelperBase {
   public void submitNewContact() {
     click(By.name("submit"));
   }
+
+  public void createContact(GroupFormContacts contact, boolean b) {
+    addNewContact();
+    fillFormContact(contact);
+    submitNewContact();
+  }
+
+  private void fillFormContact(GroupFormContacts contact) {
+  }
+
+  public boolean isThereAContact() {
+    return isElementPresent(By.name("selected[]"));
+  }
 }
