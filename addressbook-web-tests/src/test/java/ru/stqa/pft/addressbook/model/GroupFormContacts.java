@@ -1,6 +1,7 @@
 package ru.stqa.pft.addressbook.model;
 
 public class GroupFormContacts {
+  public static String getGroup;
   private final String firstname;
   private final String lastname;
   private final String nickname;
@@ -8,8 +9,9 @@ public class GroupFormContacts {
   private final String address;
   private final String mobile;
   private final String email;
+  private final String group;
 
-  public GroupFormContacts(String firstname, String lastname, String nickname, String company, String address, String mobile, String email) {
+  public GroupFormContacts(String firstname, String lastname, String nickname, String company, String address, String mobile, String email, String group) {
     this.firstname = firstname;
     this.lastname = lastname;
     this.nickname = nickname;
@@ -17,6 +19,7 @@ public class GroupFormContacts {
     this.address = address;
     this.mobile = mobile;
     this.email = email;
+    this.group = group;
   }
 
   public String getFirstname() {
@@ -45,5 +48,9 @@ public class GroupFormContacts {
 
   public String getEmail() {
     return email;
+  }
+
+  public String getGroup() {
+    return group;
   }
 }
