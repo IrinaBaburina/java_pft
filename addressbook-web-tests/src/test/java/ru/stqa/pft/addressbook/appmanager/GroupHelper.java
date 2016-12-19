@@ -44,10 +44,6 @@ public class GroupHelper extends HelperBase {
     click(By.name("selected[]"));
   }
 
-  public void submitNewContact() {
-    click(By.name("submit"));
-  }
-
   public void fillFormContact(GroupFormContacts groupFormContacts, boolean creation) {
     type(By.name("firstname"), groupFormContacts.getFirstname());
     type(By.name("lastname"), groupFormContacts.getLastname());
@@ -62,10 +58,6 @@ public class GroupHelper extends HelperBase {
     } else {
       Assert.assertFalse(isElementPresent(By.name("new_group")));
     }
-  }
-
-  public void addNewContact() {
-    click(By.linkText("add new"));
   }
 
   public void initGroupModofication() {
