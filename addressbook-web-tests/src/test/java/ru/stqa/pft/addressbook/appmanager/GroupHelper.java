@@ -44,23 +44,7 @@ public class GroupHelper extends HelperBase {
     click(By.name("selected[]"));
   }
 
-  public void fillFormContact(GroupFormContacts groupFormContacts, boolean creation) {
-    type(By.name("firstname"), groupFormContacts.getFirstname());
-    type(By.name("lastname"), groupFormContacts.getLastname());
-    type(By.name("nickname"), groupFormContacts.getNickname());
-    type(By.name("company"), groupFormContacts.getCompany());
-    type(By.name("address"), groupFormContacts.getAddress());
-    type(By.name("mobile"), groupFormContacts.getMobile());
-    type(By.name("email"), groupFormContacts.getEmail());
-
-    if (creation) {
-      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(groupFormContacts.getGroup());
-    } else {
-      Assert.assertFalse(isElementPresent(By.name("new_group")));
-    }
-  }
-
-  public void initGroupModofication() {
+    public void initGroupModofication() {
     click(By.name("edit"));
   }
 

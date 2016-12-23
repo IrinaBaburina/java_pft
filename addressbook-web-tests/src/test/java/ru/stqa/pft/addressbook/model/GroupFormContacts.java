@@ -1,7 +1,6 @@
 package ru.stqa.pft.addressbook.model;
 
 public class GroupFormContacts {
-  public static String getGroup;
   private final String firstname;
   private final String lastname;
   private final String nickname;

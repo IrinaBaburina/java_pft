@@ -25,7 +25,7 @@ public class ContactsHelper extends HelperBase {
     type(By.name("mobile"), groupFormContacts.getMobile());
     type(By.name("email"), groupFormContacts.getEmail());
 
-    if (creation) {
+    if (creation == true) {
       new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(groupFormContacts.getGroup());
     } else {
       Assert.assertFalse(isElementPresent(By.name("new_group")));
@@ -56,13 +56,10 @@ public class ContactsHelper extends HelperBase {
     click(By.name("submit"));
   }
 
-  public void createContact(GroupFormContacts contact, boolean b) {
+  public void createContact(GroupFormContacts contact) {
     addNewContact();
-    fillFormContact(contact);
+    fillFormContact(contact, true);
     submitNewContact();
-  }
-
-  private void fillFormContact(GroupFormContacts contact) {
   }
 
   public boolean isThereAContact() {
