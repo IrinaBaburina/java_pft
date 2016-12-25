@@ -16,6 +16,7 @@ public class ContactModificationTest extends TestBase {
     if (! app.getContactHelper().isThereAContact()) {
       app.getContactHelper().createContact(new GroupFormContacts("Irina", "Baburina", "Lacosta", "RTT", "Halifax, Canada, NS", "+19994034225", "irina@hotmail.com", "test1"));
     }
+    app.getContactHelper().selectContact(before - 1);
     app.getContactHelper().editContact();
     app.getContactHelper().fillFormContact(new GroupFormContacts("Irina", "Berg", "Mouse", "RTT", "Halifax, Canada, NS", "+19994034225", "irina@hotmail.com", null), false);
     app.getContactHelper().submitUpdate();
