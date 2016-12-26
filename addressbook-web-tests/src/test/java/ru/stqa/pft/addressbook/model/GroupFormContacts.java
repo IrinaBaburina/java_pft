@@ -1,6 +1,7 @@
 package ru.stqa.pft.addressbook.model;
 
 public class GroupFormContacts {
+  private final String id;
   private final String firstname;
   private final String lastname;
   private final String nickname;
@@ -10,7 +11,8 @@ public class GroupFormContacts {
   private final String email;
   private final String group;
 
-  public GroupFormContacts(String firstname, String lastname, String nickname, String company, String address, String mobile, String email, String group) {
+  public GroupFormContacts(String id, String firstname, String lastname, String nickname, String company, String address, String mobile, String email, String group) {
+    this.id = id;
     this.firstname = firstname;
     this.lastname = lastname;
     this.nickname = nickname;
@@ -19,6 +21,23 @@ public class GroupFormContacts {
     this.mobile = mobile;
     this.email = email;
     this.group = group;
+  }
+
+  public GroupFormContacts(String firstname, String lastname, String nickname, String company, String address, String mobile, String email, String group) {
+    this.id = null;
+    this.firstname = firstname;
+    this.lastname = lastname;
+    this.nickname = nickname;
+    this.company = company;
+    this.address = address;
+    this.mobile = mobile;
+    this.email = email;
+    this.group = group;
+  }
+
+
+  public String getId() {
+    return id;
   }
 
   public String getFirstname() {
@@ -56,7 +75,8 @@ public class GroupFormContacts {
   @Override
   public String toString() {
     return "GroupFormContacts{" +
-            "firstname='" + firstname + '\'' +
+            "id='" + id + '\'' +
+            ", firstname='" + firstname + '\'' +
             ", lastname='" + lastname + '\'' +
             '}';
   }
@@ -66,16 +86,18 @@ public class GroupFormContacts {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
 
-    GroupFormContacts that = (GroupFormContacts) o;
+    GroupFormContacts contacts = (GroupFormContacts) o;
 
-    if (firstname != null ? !firstname.equals(that.firstname) : that.firstname != null) return false;
-    return lastname != null ? lastname.equals(that.lastname) : that.lastname == null;
+    if (id != null ? !id.equals(contacts.id) : contacts.id != null) return false;
+    if (firstname != null ? !firstname.equals(contacts.firstname) : contacts.firstname != null) return false;
+    return lastname != null ? lastname.equals(contacts.lastname) : contacts.lastname == null;
 
   }
 
   @Override
   public int hashCode() {
-    int result = firstname != null ? firstname.hashCode() : 0;
+    int result = id != null ? id.hashCode() : 0;
+    result = 31 * result + (firstname != null ? firstname.hashCode() : 0);
     result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
     return result;
   }
