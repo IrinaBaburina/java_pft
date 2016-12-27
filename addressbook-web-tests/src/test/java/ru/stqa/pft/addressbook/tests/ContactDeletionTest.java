@@ -16,7 +16,9 @@ public class ContactDeletionTest extends TestBase {
   public void ensurePreconditionsC() {
     app.goTo().homePage();
     if (app.contact().list().size() == 0) {
-      app.contact().create(new GroupFormContacts("Irina", "Berg", "Lacosta", "RTT", "Halifax, Canada, NS", "+19994034225", "irina@hotmail.com", "test1"));
+      app.contact().create(new GroupFormContacts()
+              .withFirstname("Irina").withLastname("Berg").withNickname("Lacosta").withCompany("RTT")
+              .withAddress("Moscow").withMobile("+19994034225").withEmail("irina@hotmail.com").withGroup("Test1"));
       app.goTo().homePage();
     }
   }

@@ -13,7 +13,9 @@ public class ContactCreationTest extends TestBase {
   public void testGroupContacts() {
     app.goTo().homePage();
     List<GroupFormContacts> before = app.contact().list();
-    GroupFormContacts contact = new GroupFormContacts("Irina", "Berg", "Lacosta", "RTT", "Halifax, Canada, NS", "+19994034225", "irina@hotmail.com", "test1");
+    GroupFormContacts contact = new GroupFormContacts()
+            .withFirstname("Irina").withLastname("Berg").withNickname("Lacosta").withCompany("RTT")
+            .withAddress("Moscow").withMobile("+19994034225").withEmail("irina@hotmail.com").withGroup("test1");
     app.contact().create(contact);
     app.goTo().homePage();
     List<GroupFormContacts> after = app.contact().list();

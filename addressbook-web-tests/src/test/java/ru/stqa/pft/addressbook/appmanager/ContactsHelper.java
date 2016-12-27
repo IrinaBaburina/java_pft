@@ -93,8 +93,7 @@ public class ContactsHelper extends HelperBase {
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
       String firstname = element.findElement(By.xpath("//td[3]")).getText();
       String lastname = element.findElement(By.xpath("//td[2]")).getText();
-      GroupFormContacts contact = new GroupFormContacts(id, firstname, lastname, null, null, null, null, null, null);
-      contacts.add(contact);
+      contacts.add(new GroupFormContacts().withId(id).withFirstname(firstname).withLastname(lastname));
     }
     return contacts;
 

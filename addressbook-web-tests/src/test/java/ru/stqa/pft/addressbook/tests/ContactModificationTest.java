@@ -17,7 +17,9 @@ public class ContactModificationTest extends TestBase {
   public void ensurePreconditionsC() {
     app.goTo().homePage();
     if (! app.contact().isThereAContact()) {
-      app.contact().create(new GroupFormContacts("Irina", "Berg", "Lacosta", "RTT", "Halifax, Canada, NS", "+19994034225", "irina@hotmail.com", "test1"));
+      app.contact().create(new GroupFormContacts()
+              .withFirstname("Irina").withLastname("Berg").withNickname("Lacosta").withCompany("RTT")
+              .withAddress("Moscow").withMobile("+19994034225").withEmail("irina@hotmail.com").withGroup("Test1"));
       app.goTo().homePage();
     }
   }
@@ -26,7 +28,8 @@ public class ContactModificationTest extends TestBase {
   public void testContactModification() {
     List<GroupFormContacts> before = app.contact().list();
     int index = before.size() - 1;
-    GroupFormContacts contact = new GroupFormContacts(before.get(index).getId(), "Irina", "Berg", "Lacosta", "RTT", "Halifax, Canada, NS", "+19994034225", "irina@hotmail.com", "test1");
+    GroupFormContacts contact = new GroupFormContacts().withId(before.get(index).getId()).withFirstname("Irina").withLastname("Berg").withNickname("Lacosta").withCompany("RTT")
+            .withAddress("Moscow").withMobile("+19994034225").withEmail("irina@hotmail.com").withGroup("Test1");
     app.contact().modifyContacts(index, contact);
     app.goTo().homePage();
     List<GroupFormContacts> after = app.contact().list();

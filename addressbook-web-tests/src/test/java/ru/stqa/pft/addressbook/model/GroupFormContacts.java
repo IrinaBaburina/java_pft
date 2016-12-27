@@ -1,41 +1,55 @@
 package ru.stqa.pft.addressbook.model;
 
 public class GroupFormContacts {
-  private int id;
-  private final String firstname;
-  private final String lastname;
-  private final String nickname;
-  private final String company;
-  private final String address;
-  private final String mobile;
-  private final String email;
-  private final String group;
+  private int id = Integer.MAX_VALUE;
+  private String firstname;
+  private String lastname;
+  private String nickname;
+  private String company;
+  private String address;
+  private String mobile;
+  private String email;
+  private String group;
 
-  public GroupFormContacts(int id, String firstname, String lastname, String nickname, String company, String address, String mobile, String email, String group) {
-    this.id = id;
+  public GroupFormContacts withFirstname(String firstname) {
     this.firstname = firstname;
-    this.lastname = lastname;
-    this.nickname = nickname;
-
-    this.company = company;
-    this.address = address;
-    this.mobile = mobile;
-    this.email = email;
-    this.group = group;
+    return this;
   }
 
-  public GroupFormContacts(String firstname, String lastname, String nickname, String company, String address, String mobile, String email, String group) {
-    this.id = Integer.MAX_VALUE;
-    this.firstname = firstname;
+  public GroupFormContacts withLastname(String lastname) {
     this.lastname = lastname;
-    this.nickname = nickname;
-    this.company = company;
-    this.address = address;
-    this.mobile = mobile;
-    this.email = email;
-    this.group = group;
+    return this;
   }
 
+  public GroupFormContacts withNickname(String nickname) {
+    this.nickname = nickname;
+    return this;
+  }
+
+  public GroupFormContacts withCompany(String company) {
+    this.company = company;
+    return this;
+  }
+
+  public GroupFormContacts withAddress(String address) {
+    this.address = address;
+    return this;
+  }
+
+  public GroupFormContacts withMobile(String mobile) {
+    this.mobile = mobile;
+    return this;
+  }
+
+  public GroupFormContacts withEmail(String email) {
+    this.email = email;
+    return this;
+  }
+
+  public GroupFormContacts withGroup(String group) {
+    this.group = group;
+    return this;
+  }
 
   public int getId() {
     return id;
@@ -92,8 +106,9 @@ public class GroupFormContacts {
     return result;
   }
 
-  public void setId(int id) {
+  public GroupFormContacts withId(int id) {
     this.id = id;
+    return this;
   }
 
   @Override
