@@ -14,21 +14,19 @@ public class ContactDeletionTest extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditionsC() {
-    app.getNavigationHelper().gotoHomePage();
-    if (! app.getContactHelper().isThereAContact()) {
-      app.getContactHelper().createContact(new GroupFormContacts("Irina", "Berg", "Lacosta", "RTT", "Halifax, Canada, NS", "+19994034225", "irina@hotmail.com", "test1"));
-      app.getNavigationHelper().gotoHomePage();
+    app.goTo().homePage();
+    if (app.contact().list().size() == 0) {
+      app.contact().create(new GroupFormContacts("Irina", "Berg", "Lacosta", "RTT", "Halifax, Canada, NS", "+19994034225", "irina@hotmail.com", "test1"));
+      app.goTo().homePage();
     }
   }
 
   @Test
   public void testContactDeletion() {
-    List<GroupFormContacts> before = app.getContactHelper().getContactList();
-    app.getContactHelper().selectContact(before.size() - 1);
-    app.getContactHelper().deleteContact();
-    app.getContactHelper().closeAlert();
-    app.getNavigationHelper().gotoHomePage();
-    List<GroupFormContacts> after = app.getContactHelper().getContactList();
+    List<GroupFormContacts> before = app.contact().list();
+    app.contact().delete(before);
+    app.goTo().homePage();
+    List<GroupFormContacts> after = app.contact().list();
     Assert.assertEquals(after.size(), before.size() - 1);
 
     before.remove(before.size() - 1);

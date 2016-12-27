@@ -11,12 +11,12 @@ public class ContactCreationTest extends TestBase {
 
   @Test
   public void testGroupContacts() {
-    app.getNavigationHelper().gotoHomePage();
-    List<GroupFormContacts> before = app.getContactHelper().getContactList();
+    app.goTo().homePage();
+    List<GroupFormContacts> before = app.contact().list();
     GroupFormContacts contact = new GroupFormContacts("Irina", "Berg", "Lacosta", "RTT", "Halifax, Canada, NS", "+19994034225", "irina@hotmail.com", "test1");
-    app.getContactHelper().createContact(contact);
-    app.getNavigationHelper().gotoHomePage();
-    List<GroupFormContacts> after = app.getContactHelper().getContactList();
+    app.contact().create(contact);
+    app.goTo().homePage();
+    List<GroupFormContacts> after = app.contact().list();
     Assert.assertEquals(after.size(), before.size() + 1);
 
     before.add(contact);

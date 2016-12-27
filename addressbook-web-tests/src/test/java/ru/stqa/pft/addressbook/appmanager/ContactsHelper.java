@@ -59,7 +59,7 @@ public class ContactsHelper extends HelperBase {
     click(By.name("submit"));
   }
 
-  public void createContact(GroupFormContacts contact) {
+  public void create(GroupFormContacts contact) {
     addNewContact();
     fillFormContact(contact, true);
     submitNewContact();
@@ -72,6 +72,12 @@ public class ContactsHelper extends HelperBase {
     submitUpdate();
   }
 
+  public void delete(List<GroupFormContacts> before) {
+    selectContact(before.size() - 1);
+    deleteContact();
+    closeAlert();
+  }
+
   public boolean isThereAContact() {
     return isElementPresent(By.name("selected[]"));
   }
@@ -80,7 +86,7 @@ public class ContactsHelper extends HelperBase {
     return wd.findElements(By.name("selected[]")).size();
   }
 
-  public List<GroupFormContacts> getContactList() {
+  public List<GroupFormContacts> list() {
     List<GroupFormContacts> contacts = new ArrayList<>();
     List<WebElement> elements = wd.findElements(By.name("entry"));
     for (WebElement element : elements) {
