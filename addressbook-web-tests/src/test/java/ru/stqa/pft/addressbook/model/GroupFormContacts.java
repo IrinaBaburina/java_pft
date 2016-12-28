@@ -94,6 +94,7 @@ public class GroupFormContacts {
 
     GroupFormContacts contacts = (GroupFormContacts) o;
 
+    if (id != contacts.id) return false;
     if (firstname != null ? !firstname.equals(contacts.firstname) : contacts.firstname != null) return false;
     return lastname != null ? lastname.equals(contacts.lastname) : contacts.lastname == null;
 
@@ -101,7 +102,8 @@ public class GroupFormContacts {
 
   @Override
   public int hashCode() {
-    int result = firstname != null ? firstname.hashCode() : 0;
+    int result = id;
+    result = 31 * result + (firstname != null ? firstname.hashCode() : 0);
     result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
     return result;
   }

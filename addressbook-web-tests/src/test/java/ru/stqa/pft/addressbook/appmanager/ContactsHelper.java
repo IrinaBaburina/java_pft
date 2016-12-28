@@ -7,8 +7,9 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.GroupFormContacts;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
   * Created by iryamka on 12/13/2016.
@@ -43,9 +44,10 @@ public class ContactsHelper extends HelperBase {
     click(By.name("update"));
   }
 
-  public void selectContact(int index) {
-    wd.findElements(By.name("selected[]")).get(index).click();
+  public void selectContactById(int id) {
+    wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
   }
+
 
   public void deleteContact() {
     click(By.xpath("//div[@id='content']/form[2]/div[2]/input"));
@@ -65,15 +67,15 @@ public class ContactsHelper extends HelperBase {
     submitNewContact();
   }
 
-  public void modifyContacts(int index, GroupFormContacts contact) {
-    selectContact(index);
+  public void modifyContacts(GroupFormContacts contact) {
+    selectContactById(contact.getId());
     editContact();
     fillFormContact(contact, false);
     submitUpdate();
   }
 
-  public void delete(List<GroupFormContacts> before) {
-    selectContact(before.size() - 1);
+  public void delete(GroupFormContacts contact) {
+    selectContactById(contact.getId());
     deleteContact();
     closeAlert();
   }
@@ -86,8 +88,8 @@ public class ContactsHelper extends HelperBase {
     return wd.findElements(By.name("selected[]")).size();
   }
 
-  public List<GroupFormContacts> list() {
-    List<GroupFormContacts> contacts = new ArrayList<>();
+  public Set<GroupFormContacts> all() {
+    Set<GroupFormContacts> contacts = new HashSet<>();
     List<WebElement> elements = wd.findElements(By.name("entry"));
     for (WebElement element : elements) {
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
