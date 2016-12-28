@@ -25,7 +25,7 @@ public class ContactDeletionTest extends TestBase {
     if (app.contact().all().size() == 0) {
       app.contact().create(new GroupFormContacts()
               .withFirstname("Irina").withLastname("Berg").withNickname("Lacosta").withCompany("RTT")
-              .withAddress("Moscow").withMobile("+19994034225").withEmail("irina@hotmail.com").withGroup("Test1"));
+              .withAddress("Moscow").withMobile("+19994034225").withEmail("irina@hotmail.com").withGroup("test1"));
       app.goTo().homePage();
     }
   }

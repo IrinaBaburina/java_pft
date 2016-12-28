@@ -25,7 +25,7 @@ public class ContactModificationTest extends TestBase {
     if (! app.contact().isThereAContact()) {
       app.contact().create(new GroupFormContacts()
               .withFirstname("Irina").withLastname("Berg").withNickname("Lacosta").withCompany("RTT")
-              .withAddress("Moscow").withMobile("+19994034225").withEmail("irina@hotmail.com").withGroup("Test1"));
+              .withAddress("Moscow").withMobile("+19994034225").withEmail("irina@hotmail.com").withGroup("test1"));
       app.goTo().homePage();
     }
   }
@@ -35,7 +35,7 @@ public class ContactModificationTest extends TestBase {
     Contacts before = app.contact().all();
     GroupFormContacts modifiedContact = before.iterator().next();
     GroupFormContacts contact = new GroupFormContacts().withId(modifiedContact.getId()).withFirstname("Irina").withLastname("Berg").withNickname("Lacosta").withCompany("RTT")
-            .withAddress("Moscow").withMobile("+19994034225").withEmail("irina@hotmail.com").withGroup("Test1");
+            .withAddress("Moscow").withMobile("+19994034225").withEmail("irina@hotmail.com").withGroup("test1");
     app.contact().modifyContacts(contact);
     app.goTo().homePage();
     Contacts after = app.contact().all();
