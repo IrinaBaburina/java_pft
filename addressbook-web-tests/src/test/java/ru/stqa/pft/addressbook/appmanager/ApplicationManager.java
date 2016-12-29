@@ -34,8 +34,8 @@ public class ApplicationManager {
     }
 
 
-    //wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-    wd.get("http://localhost/addressbook/group.php");
+    setTimeOut(3);
+    wd.get("http://localhost/addressbook");
     groupHelper = new GroupHelper(wd);
     navigationHelper = new NavigationHelper(wd);
     sessionHelper = new SessionHelper(wd);
@@ -47,15 +47,20 @@ public class ApplicationManager {
     wd.quit();
   }
 
-  public GroupHelper getGroupHelper() {
+  public GroupHelper group() {
     return groupHelper;
   }
 
-  public NavigationHelper getNavigationHelper() {
+  public NavigationHelper goTo() {
+
     return navigationHelper;
   }
 
-  public ContactsHelper getContactHelper() {
+  public ContactsHelper contact() {
     return contactsHelper;
+  }
+
+  public void setTimeOut(int time) {
+    wd.manage().timeouts().implicitlyWait(time, TimeUnit.SECONDS);
   }
 }

@@ -1,13 +1,14 @@
 package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.Select;
-import org.testng.Assert;
+import org.openqa.selenium.WebElement;
 import ru.stqa.pft.addressbook.model.GroupData;
-import ru.stqa.pft.addressbook.model.GroupFormContacts;
+import ru.stqa.pft.addressbook.model.Groups;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
   * Created by iryamka on 12/13/2016.
@@ -40,27 +41,11 @@ public class GroupHelper extends HelperBase {
     click(By.name("delete"));
   }
 
-  public void selectGroup() {
-    click(By.name("selected[]"));
+  public void selectGroupById(int id) {
+    wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
   }
 
-  public void fillFormContact(GroupFormContacts groupFormContacts, boolean creation) {
-    type(By.name("firstname"), groupFormContacts.getFirstname());
-    type(By.name("lastname"), groupFormContacts.getLastname());
-    type(By.name("nickname"), groupFormContacts.getNickname());
-    type(By.name("company"), groupFormContacts.getCompany());
-    type(By.name("address"), groupFormContacts.getAddress());
-    type(By.name("mobile"), groupFormContacts.getMobile());
-    type(By.name("email"), groupFormContacts.getEmail());
-
-    if (creation) {
-      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(groupFormContacts.getGroup());
-    } else {
-      Assert.assertFalse(isElementPresent(By.name("new_group")));
-    }
-  }
-
-  public void initGroupModofication() {
+    public void initGroupModofication() {
     click(By.name("edit"));
   }
 
@@ -68,14 +53,51 @@ public class GroupHelper extends HelperBase {
     click(By.name("update"));
   }
 
-  public void createGroup(GroupData group) {
+  public void create(GroupData group) {
     initGroupCreation();
     fillGroupForm(group);
     submitGroupCreation();
+    groupCache = null;
+    returnToGroupPage();
+  }
+
+  public void modify(GroupData group) {
+    selectGroupById(group.getId());
+    initGroupModofication();
+    fillGroupForm(group);
+    submitGroupModification();
+    groupCache = null;
+    returnToGroupPage();
+  }
+
+  public void delete(GroupData group) {
+    selectGroupById(group.getId());
+    deleteSelectedGroups();
+    groupCache = null;
     returnToGroupPage();
   }
 
   public boolean isThereAGroup() {
     return isElementPresent(By.name("selected[]"));
+  }
+
+  public int count() {
+    return wd.findElements(By.name("selected[]")).size();
+  }
+
+  private Groups groupCache = null;
+
+  public Groups all() {
+    if (groupCache != null) {
+      return new Groups(groupCache);
+    }
+    groupCache = new Groups();
+    List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
+    for (WebElement element : elements) {
+      String name = element.getText();
+      int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+      groupCache.add(new GroupData().withId(id).withName(name));
+    }
+    return new Groups(groupCache);
   }
 }
