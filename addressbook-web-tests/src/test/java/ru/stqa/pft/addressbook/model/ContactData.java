@@ -1,6 +1,6 @@
 package ru.stqa.pft.addressbook.model;
 
-public class GroupFormContacts {
+public class ContactData {
   private int id = Integer.MAX_VALUE;
   private String firstname;
   private String lastname;
@@ -8,45 +8,57 @@ public class GroupFormContacts {
   private String company;
   private String address;
   private String mobile;
+  private String home;
+  private String work;
   private String email;
   private String group;
 
-  public GroupFormContacts withFirstname(String firstname) {
+  public ContactData withFirstname(String firstname) {
     this.firstname = firstname;
     return this;
   }
 
-  public GroupFormContacts withLastname(String lastname) {
+  public ContactData withLastname(String lastname) {
     this.lastname = lastname;
     return this;
   }
 
-  public GroupFormContacts withNickname(String nickname) {
+  public ContactData withNickname(String nickname) {
     this.nickname = nickname;
     return this;
   }
 
-  public GroupFormContacts withCompany(String company) {
+  public ContactData withCompany(String company) {
     this.company = company;
     return this;
   }
 
-  public GroupFormContacts withAddress(String address) {
+  public ContactData withAddress(String address) {
     this.address = address;
     return this;
   }
 
-  public GroupFormContacts withMobile(String mobile) {
+  public ContactData withMobile(String mobile) {
     this.mobile = mobile;
     return this;
   }
 
-  public GroupFormContacts withEmail(String email) {
+  public ContactData withHome(String home) {
+    this.home = home;
+    return this;
+  }
+
+  public ContactData withWork(String work) {
+    this.work = work;
+    return this;
+  }
+
+  public ContactData withEmail(String email) {
     this.email = email;
     return this;
   }
 
-  public GroupFormContacts withGroup(String group) {
+  public ContactData withGroup(String group) {
     this.group = group;
     return this;
   }
@@ -79,6 +91,14 @@ public class GroupFormContacts {
     return mobile;
   }
 
+  public String getHome() {
+    return home;
+  }
+
+  public String getWork() {
+    return work;
+  }
+
   public String getEmail() {
     return email;
   }
@@ -92,11 +112,11 @@ public class GroupFormContacts {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
 
-    GroupFormContacts contacts = (GroupFormContacts) o;
+    ContactData that = (ContactData) o;
 
-    if (id != contacts.id) return false;
-    if (firstname != null ? !firstname.equals(contacts.firstname) : contacts.firstname != null) return false;
-    return lastname != null ? lastname.equals(contacts.lastname) : contacts.lastname == null;
+    if (id != that.id) return false;
+    if (firstname != null ? !firstname.equals(that.firstname) : that.firstname != null) return false;
+    return lastname != null ? lastname.equals(that.lastname) : that.lastname == null;
 
   }
 
@@ -108,17 +128,20 @@ public class GroupFormContacts {
     return result;
   }
 
-  public GroupFormContacts withId(int id) {
+  public ContactData withId(int id) {
     this.id = id;
     return this;
   }
 
   @Override
   public String toString() {
-    return "GroupFormContacts{" +
-            "id='" + id + '\'' +
+    return "ContactData{" +
+            "id=" + id +
             ", firstname='" + firstname + '\'' +
             ", lastname='" + lastname + '\'' +
+            ", mobile='" + mobile + '\'' +
+            ", home='" + home + '\'' +
+            ", work='" + work + '\'' +
             '}';
   }
 

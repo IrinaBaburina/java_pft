@@ -1,14 +1,9 @@
 package ru.stqa.pft.addressbook.tests;
 
-import org.hamcrest.CoreMatchers;
-import org.hamcrest.MatcherAssert;
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
-import ru.stqa.pft.addressbook.model.GroupFormContacts;
-
-import java.util.Set;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -23,9 +18,9 @@ public class ContactModificationTest extends TestBase {
   public void ensurePreconditionsC() {
     app.goTo().homePage();
     if (! app.contact().isThereAContact()) {
-      app.contact().create(new GroupFormContacts()
+      app.contact().create(new ContactData()
               .withFirstname("Irina").withLastname("Berg").withNickname("Lacosta").withCompany("RTT")
-              .withAddress("Moscow").withMobile("+19994034225").withEmail("irina@hotmail.com").withGroup("test1"));
+              .withAddress("Moscow").withMobile("+19994034225").withHome("11111").withWork("22222").withEmail("irina@hotmail.com").withGroup("test1"));
       app.goTo().homePage();
     }
   }
@@ -33,9 +28,9 @@ public class ContactModificationTest extends TestBase {
   @Test
   public void testContactModification() {
     Contacts before = app.contact().all();
-    GroupFormContacts modifiedContact = before.iterator().next();
-    GroupFormContacts contact = new GroupFormContacts().withId(modifiedContact.getId()).withFirstname("Irina").withLastname("Berg").withNickname("Lacosta").withCompany("RTT")
-            .withAddress("Moscow").withMobile("+19994034225").withEmail("irina@hotmail.com").withGroup("test1");
+    ContactData modifiedContact = before.iterator().next();
+    ContactData contact = new ContactData().withId(modifiedContact.getId()).withFirstname("Irina").withLastname("Berg").withNickname("Lacosta").withCompany("RTT")
+            .withAddress("Moscow").withMobile("+19994034225").withHome("11111").withWork("22222").withEmail("irina@hotmail.com").withGroup("test1");
     app.contact().modifyContacts(contact);
     app.goTo().homePage();
     assertThat(app.contact().count(), equalTo(before.size()));
