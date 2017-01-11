@@ -135,7 +135,6 @@ public class ContactData {
     return allemails;
   }
 
-
   public String getEmail2() {
     return email2;
   }

@@ -48,6 +48,10 @@ public class ContactsHelper extends HelperBase {
     wd.findElement(By.cssSelector("a[href='edit.php?id=" + id + "']")).click();
   }
 
+  public void viewContactById(int id) {
+    wd.findElement(By.cssSelector("a[href='view.php?id=" + id + "']")).click();
+  }
+
   public void submitUpdate() {
     click(By.name("update"));
   }
@@ -136,6 +140,33 @@ public class ContactsHelper extends HelperBase {
     return new ContactData().withId(contact.getId()).withFirstname(firstname)
             .withLastname(lastname).withMobile(mobile).withHome(home).withWork(work)
             .withEmail(email).withEmail2(email2).withEmail3(email3).withAddress(address);
+
+  }
+
+  public String cleaned(String phone) {
+    return phone.replaceAll("\\s", "").replaceAll("[-():A-z]", "");
+  }
+
+  public ContactData getInfoFromContactView(ContactData contact) {
+    viewContactById(contact.getId());
+    String[] contactView = wd.findElement(By.xpath("//div[@id='content']")).getText().split("\n");
+    String[] name = contactView[0].split(" ");
+    String firstname = name[0];
+    String lastname = name[1];
+   // String nickname = contactView[1];
+   // String company = contactView[2];
+    String address = contactView[3];
+    String home = cleaned(contactView[5]);
+    String mobile = cleaned(contactView[6]);
+    String work = cleaned(contactView[7]);
+    String email = contactView[9];
+    String email2 = contactView[10];
+    String email3 = contactView[11];
+
+
+    return new ContactData().withId(contact.getId()).withFirstname(firstname)
+            .withLastname(lastname).withAddress(address).withHome(home).withMobile(mobile).withWork(work)
+            .withEmail(email).withEmail2(email2).withEmail3(email3);
 
   }
 }
